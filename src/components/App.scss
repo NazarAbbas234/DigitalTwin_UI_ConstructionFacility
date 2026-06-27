@@ -1,0 +1,12 @@
+.smart-table {
+  font-size: 12px;
+  width: 100%;
+  border-collapse: collapse; /* Prevents double border lines */
+
+
+  td, th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+  }
+}

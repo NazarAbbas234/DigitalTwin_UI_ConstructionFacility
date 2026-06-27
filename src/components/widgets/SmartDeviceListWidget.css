@@ -1,0 +1,287 @@
+/* ==========================================================================
+   1. Core Table Layout Framework
+   ========================================================================== */
+.smart-table {
+  font-size: 13px;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--iui-font-sans, system-ui, sans-serif);
+}
+
+.smart-table th, 
+.smart-table td {
+  /* Forces the browser to draw clean, distinct, visible borders */
+  border: 1.5px solid #4a5568 !important; 
+  text-align: left;
+  padding: 10px 12px;
+  color: #1a202c; /* Ensures the inner text is also highly readable */
+}
+
+/* Style and wrapping for the first column (Component / Asset ID) */
+.smart-table th:nth-child(1) {
+  width: auto;
+  white-space: normal; /* allow controlled two-line layout */
+  word-break: normal;
+  max-width: 180px;
+  background: linear-gradient(90deg, #0ea5a4 0%, #06b6d4 100%); /* teal gradient */
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.smart-table td:nth-child(1) {
+  width: auto;
+  white-space: nowrap; /* keep cell single-line */
+  background-color: rgba(14,165,164,0.04); /* subtle teal tint */
+}
+
+/* Header stacked layout: top = Asset ID, bottom = Component */
+.header-stack { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+.header-stack .header-top { font-size: 13px; line-height: 1; }
+.header-stack .header-bottom { font-size: 11px; line-height: 1; opacity: 0.95; font-weight: 700; }
+.smart-table th {
+  background-color: #2d3748; /* Gives headers a solid slate-dark background */
+  color: #ffffff; /* Makes header text bright white */
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   2. Dynamic Row Transitions (Flashes beautifully when IoT state flips)
+   ========================================================================== */
+.device-row {
+  cursor: pointer;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Conditional Row Background Styling (Using matching names from your TSX) */
+.device-row.row-status-active {
+  background-color: rgba(38, 175, 97, 0.03) !important; /* Soft Green tint */
+}
+
+.device-row.row-status-inactive {
+  background-color: rgba(222, 53, 11, 0.03) !important; /* Soft Red tint */
+}
+
+/* Row Hover Interaction Effects */
+.device-row.row-status-active:hover {
+  background-color: rgba(38, 175, 97, 0.1) !important; /* Deepens Green on hover */
+}
+
+.device-row.row-status-inactive:hover {
+  background-color: rgba(222, 53, 11, 0.1) !important; /* Deepens Red on hover */
+}
+
+/* ==========================================================================
+   3. Status Interface Badges (Text Containers)
+   ========================================================================== */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.status-badge.badge-on {
+  background-color: #e6f7ed !important;
+  color: #26af61 !important; /* Vibrant IoT Green text */
+}
+
+.status-badge.badge-off {
+  background-color: #fce8e6 !important;
+  color: #de350b !important; /* Vibrant Warning Red text */
+}
+
+/* Schedule status badges */
+.status-badge.sched-delayed {
+  background-color: #fdecea !important; /* light red */
+  color: #b91c1c !important;
+}
+.status-badge.sched-ontime {
+  background-color: #fff7ed !important; /* light yellow */
+  color: #92400e !important;
+}
+.status-badge.sched-ahead {
+  background-color: #ecfdf5 !important; /* light green */
+  color: #047857 !important;
+}
+.status-badge.sched-unknown {
+  background-color: #eef2ff !important;
+  color: #4338ca !important;
+}
+
+/* ==========================================================================
+   4. Telemetry Metrics Typography Formatting
+   ========================================================================== */
+.telemetry-cell {
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+
+/* Container Layout Split */
+.widget-dashboard-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--iui-font-sans, system-ui, sans-serif);
+}
+
+/* Sidebar Styling */
+.widget-sidebar {
+  width: 280px;
+  min-width: 280px;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #cfd8dc;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.widget-main-content {
+  flex-grow: 1;
+  overflow-x: auto;
+}
+
+/* Form Elements */
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar-section label {
+  font-weight: 600;
+  font-size: 12px;
+  color: #455a64;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.search-input,
+.filter-dropdown {
+  padding: 8px 12px;
+  border: 1.5px solid #b0bec5;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus,
+.filter-dropdown:focus {
+  border-color: #2d3748;
+}
+
+/* Results Navigation List */
+.results-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+}
+
+.result-item {
+  padding: 8px 12px;
+  font-size: 13px;
+  border-bottom: 1px solid #edf2f7;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.result-item:hover {
+  background-color: #edf2f7;
+  font-weight: 600;
+}
+
+/* Modal Overlay Background Backdrop */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensures it floats above the 3D viewport canvas */
+}
+
+/* Modal Content Card Box */
+.edit-modal-card {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 8px;
+  width: 360px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.edit-modal-card h3 {
+  margin: 0;
+  color: #1a202c;
+  font-size: 18px;
+  border-bottom: 2px solid #edf2f7;
+  padding-bottom: 8px;
+}
+
+/* Modal Buttons Form Control Layout */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background-color: #2d3748;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background-color: #e2e8f0;
+  color: #4a5568;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Floating Notification Toast Box */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #1a202c;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  font-weight: 600;
+  font-size: 13px;
+  border-left: 4px solid #26af61; /* Green success accent bar */
+  animation: slideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideIn {
+  from { transform: translateY(100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
