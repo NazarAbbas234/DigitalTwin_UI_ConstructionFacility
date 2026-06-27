@@ -33,7 +33,7 @@ export class SmartDeviceDecorator implements Decorator {
         devices.forEach((device) => {
             if (!device.origin) return; // skip elements without origin
 
-            const ecId = device.ecInstanceId || device.ECInstanceId || (device as any).id;
+            const ecId = device.ecInstanceId || device.ecInstanceId || (device as any).id;
             const cloudForElement = cloudData[ecId] || {};
 
             const smartDeviceMarker = new SmartDeviceMarker(
