@@ -7,7 +7,7 @@ export class DeviceStatusApi {
     private static get baseUrl(): string {
         return window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
             ? "http://localhost:5000"
-            : "https://smart-house-backend-1.onrender.com"; //Paste your real production URL here
+            : "https://digitaltwin-backend-constructionfacility.onrender.com"; //Paste your real production URL here
     }
 
     public static async getData(): Promise<DeviceData> {
